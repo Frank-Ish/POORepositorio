@@ -1,0 +1,45 @@
+<div class="espacio">
+  <h1 class="nombre-sitio text-center ">Mantenimiento<span> De Clientes</span></h1>
+</div>
+
+
+<div>
+    <button class="agregar" mat-button color="primary" (click)="openModal()">Crear</button>
+</div>
+
+<table mat-table [dataSource]= "dataSource" class="mat-elevation-z8">
+    <!-- Cedula -->
+    <ng-container matColumnDef="cedula">
+      <th mat-header-cell *matHeaderCellDef> Cedula </th>
+      <td mat-cell *matCellDef="let element"> {{element.cedula}} </td>
+    </ng-container>
+  
+    <!-- Nombre-->
+    <ng-container matColumnDef="nombre">
+      <th mat-header-cell *matHeaderCellDef> Nombre </th>
+      <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+    </ng-container>
+  
+    <!-- Apellido1-->
+    <ng-container matColumnDef="apellido1">
+      <th mat-header-cell *matHeaderCellDef> Primer Apellido </th>
+      <td mat-cell *matCellDef="let element"> {{element.apellido1}} </td>
+    </ng-container>
+  
+    <!-- Apellido2 -->
+    <ng-container matColumnDef="apellido2">
+      <th mat-header-cell *matHeaderCellDef> Segundo Apellido </th>
+      <td mat-cell *matCellDef="let element"> {{element.apellido2}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="acciones">
+        <th mat-header-cell *matHeaderCellDef> Acciones </th>
+        <td mat-cell *matCellDef="let element"> 
+            <button mat-button color="accent" (click)="openModal(element)">Modificar</button>
+            <button mat-button color="warn" (click)="eliminar(element)">Eliminar</button>
+        </td>
+      </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>

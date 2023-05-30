@@ -1,0 +1,96 @@
+<mat-card>
+  <mat-card-title class="text-center">Detalle Factura</mat-card-title>
+  <form>
+    <mat-card-content >
+      <mat-card-title>Datos del Cliente</mat-card-title>
+      <mat-form-field appearance="fill" class="espacio">
+        <mat-label>Cédula</mat-label>
+        <input matInput placeholder="Cédula" [(ngModel)]="clienteService.clienteSeleccionado.cedula" name="cedula">
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="espacio">
+        <mat-label>Nombre</mat-label>
+        <input matInput placeholder="Nombre" [(ngModel)]="clienteService.clienteSeleccionado.nombre" name="nombre">
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="espacio">
+        <mat-label>Primer Apellido</mat-label>
+        <input matInput placeholder="Primer Apellido" [(ngModel)]="clienteService.clienteSeleccionado.apellido1" name="apellido1">
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="espacio">
+        <mat-label>Segundo Apellido</mat-label>
+        <input matInput placeholder="Segundo Apellido" [(ngModel)]="clienteService.clienteSeleccionado.apellido2" name="apellido2">
+      </mat-form-field>
+      <button mat-raised-button color="accent" (click)="openModal()" type="button">Agregar Cliente</button>
+    </mat-card-content>
+    <!--Contenido del cliente-->
+</form>
+<form *ngFor="let producto of productosSeleccionados; let i = index">
+  <mat-card-content>
+    <mat-card-title>Datos del Producto {{i + 1}}</mat-card-title>
+    <mat-form-field appearance="fill" class="espacio">
+      <mat-label>Código</mat-label>
+      <input matInput placeholder="Código" [(ngModel)]="producto.idProducto" name="idProducto{{i}}">
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="espacio">
+      <mat-label>Producto</mat-label>
+      <input matInput placeholder="Nombre del Producto" [(ngModel)]="producto.nombre" name="nombre{{i}}">
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="espacio">
+      <mat-label>Precio</mat-label>
+      <input matInput type="number" placeholder="Precio Unitario" [(ngModel)]="producto.precioVenta" name="precioVenta{{i}}">
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="espacio">
+      <mat-label>Cantidad</mat-label>
+      <input matInput type="number" placeholder="Cantidad" [max]="producto.stock" min="1" [(ngModel)]="producto.stock" name="stock{{i}}">
+    </mat-form-field>
+  </mat-card-content>
+</form>
+<button mat-button color="accent" (click)="openModal2()">Agregar Producto</button>
+
+  <form>
+    <mat-card-content>
+      <mat-card-title>Tipo de Pago</mat-card-title>
+      <mat-form-field appearance="fill" class="espacio">
+        <mat-label>Código</mat-label>
+        <input matInput placeholder="Código" [(ngModel)]="tipoPagoService.tipoPagoSeleccionado.idTipoPago" name="idTipoPago">
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="espacio">
+        <mat-label>Tipo De Pago</mat-label>
+        <input matInput placeholder="Tipo de Pago" [(ngModel)]="tipoPagoService.tipoPagoSeleccionado.nombre"   name="nombre">
+      </mat-form-field>
+      <button mat-raised-button color="accent" (click)="openModal3()">Agregar Tipo de Pago</button>
+    </mat-card-content>
+  </form>
+  <form>
+    <mat-card-content>
+      <mat-card-title>Tipo de Venta</mat-card-title>
+      <mat-form-field appearance="fill" class="espacio">
+        <mat-label>Código</mat-label>
+        <input matInput placeholder="Código" [(ngModel)]="tipoVentaService.tipoVentaSeleccionada.idTipoVenta" name="idTipoPago">
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="espacio">
+        <mat-label>Tipo De Pago</mat-label>
+        <input matInput placeholder="tipo de Venta" [(ngModel)]="tipoVentaService.tipoVentaSeleccionada.nombre"   name="nombre">
+      </mat-form-field>
+      <button mat-raised-button color="accent" (click)="openModal4()">Agregar Tipo de Pago</button>
+    </mat-card-content>
+  </form>
+  <form action="">
+    <mat-card-content>
+      <mat-form-field appearance="fill" class="espacio">
+        <mat-label>Sub-Total</mat-label>
+        <input matInput type="number" [value]="calcularSubtotal()" disabled>
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="espacio">
+        <mat-label>IVA</mat-label>
+        <input matInput type="number" [value]="calcularIVA()" disabled>
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="espacio">
+        <mat-label>Total</mat-label>
+        <input matInput type="number" [value]="calcularTotal()" disabled name="total">
+      </mat-form-field>
+    </mat-card-content>
+  </form>
+  
+  <button mat-button color="accent" type="submit" (click)="guardar()" >Guardar</button> 
+</mat-card>
+
